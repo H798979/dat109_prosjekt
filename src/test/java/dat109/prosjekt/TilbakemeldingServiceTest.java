@@ -8,12 +8,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import dat109.prosjekt.Controller.TilbakemeldingService;
 import dat109.prosjekt.Repo.StatistikkResponse;
 import dat109.prosjekt.Repo.TilbakemeldingRepo;
-import dat109.prosjekt.Repo.TilbakemeldingVerdi;
+import dat109.prosjekt.Service.TilbakemeldingService;
 import dat109.prosjekt.entity.Forelesning;
 import dat109.prosjekt.entity.Tilbakemelding;
+import dat109.prosjekt.entity.TilbakemeldingVerdi;
 
 import java.time.LocalDateTime;
 

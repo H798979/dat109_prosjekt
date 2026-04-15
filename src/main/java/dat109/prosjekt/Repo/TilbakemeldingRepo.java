@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import dat109.prosjekt.entity.Tilbakemelding;
+import dat109.prosjekt.entity.TilbakemeldingVerdi;
 
 import java.util.List;
 

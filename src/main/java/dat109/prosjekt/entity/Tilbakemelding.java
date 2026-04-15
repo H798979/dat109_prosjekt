@@ -3,8 +3,6 @@ package dat109.prosjekt.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-import dat109.prosjekt.Repo.TilbakemeldingVerdi;
-
 @Entity
 public class Tilbakemelding {
 

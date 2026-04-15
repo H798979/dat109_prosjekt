@@ -1,45 +1,58 @@
 package dat109.prosjekt.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dat109.prosjekt.Repo.ForelesningRepo;
-import dat109.prosjekt.Repo.TilbakemeldingVerdi;
+import dat109.prosjekt.Service.TilbakemeldingService;
 import dat109.prosjekt.entity.Forelesning;
 import dat109.prosjekt.entity.Tilbakemelding;
+import dat109.prosjekt.entity.TilbakemeldingVerdi;
 
-import java.util.Map;
+import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/forelesninger/{forelesningId}")
+@Controller
+@RequestMapping("/tilbakemelding")
 public class TilbakemeldingController {
 
     @Autowired TilbakemeldingService tilbakemeldingService;
     @Autowired ForelesningRepo forelesningRepo;
 
-    @PostMapping("/tilbakemelding")
-    public ResponseEntity<?> giTilbakemelding(@PathVariable Long forelesningId, @RequestBody Map<String, String> body) {
-        Forelesning f = forelesningRepo.findById(forelesningId).orElse(null);
-        if (f == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("feil", "Forelesning ikkje funnen."));
-
-        try {
-            TilbakemeldingVerdi vurdering = TilbakemeldingVerdi.valueOf(body.get("vurdering"));
-            Tilbakemelding t = tilbakemeldingService.registrer(f, vurdering, body.get("studentToken"));
-            return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
-                    "id", t.getId(),
-                    "vurdering", t.getVurdering(),
-                    "innsendt", t.getInnsendt()));
-        } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("feil", e.getMessage()));
+    @GetMapping("/skjema")
+    public String visSkjema(@RequestParam Long forelesningId, Model model, RedirectAttributes ra) {
+        Optional<Forelesning> opt = forelesningRepo.findById(forelesningId);
+        if (opt.isEmpty()) {
+            ra.addFlashAttribute("feil", "Forelesning ikkje funnen.");
+            return "redirect:/forelesninger";
         }
+        model.addAttribute("forelesning", opt.get());
+        model.addAttribute("vurderinger", TilbakemeldingVerdi.values());
+        return "giTilbakemelding";
     }
 
-    @GetMapping("/statistikk")
-    public ResponseEntity<?> hentStatistikk(@PathVariable Long forelesningId) {
-        Forelesning f = forelesningRepo.findById(forelesningId).orElse(null);
-        if (f == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("feil", "Forelesning ikkje funnen."));
-        return ResponseEntity.ok(tilbakemeldingService.hentStatistikk(forelesningId));
+    @PostMapping("/send")
+    public String giTilbakemelding(@RequestParam Long forelesningId,
+                                   @RequestParam String vurdering,
+                                   @RequestParam String studentToken,
+                                   RedirectAttributes ra) {
+        Optional<Forelesning> opt = forelesningRepo.findById(forelesningId);
+        if (opt.isEmpty()) {
+            ra.addFlashAttribute("feil", "Forelesning ikkje funnen.");
+            return "redirect:/forelesninger";
+        }
+
+        try {
+            TilbakemeldingVerdi verdi = TilbakemeldingVerdi.valueOf(vurdering);
+            tilbakemeldingService.registrer(opt.get(), verdi, studentToken);
+            ra.addFlashAttribute("melding", "Tilbakemelding registrert!");
+        } catch (IllegalArgumentException e) {
+            ra.addFlashAttribute("feil", "Ugyldig vurdering.");
+        } catch (IllegalStateException e) {
+            ra.addFlashAttribute("feil", e.getMessage());
+        }
+        return "redirect:/forelesninger/vis?id=" + forelesningId;
     }
 }

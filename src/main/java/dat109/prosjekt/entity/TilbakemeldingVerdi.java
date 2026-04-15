@@ -1,4 +1,4 @@
-package dat109.prosjekt.Repo;
+package dat109.prosjekt.entity;
 
 public enum TilbakemeldingVerdi {
     GROENN,
