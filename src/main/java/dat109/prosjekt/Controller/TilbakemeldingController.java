@@ -9,7 +9,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import dat109.prosjekt.Repo.ForelesningRepo;
 import dat109.prosjekt.Service.TilbakemeldingService;
 import dat109.prosjekt.entity.Forelesning;
-import dat109.prosjekt.entity.Tilbakemelding;
 import dat109.prosjekt.entity.TilbakemeldingVerdi;
 
 import java.util.Optional;
