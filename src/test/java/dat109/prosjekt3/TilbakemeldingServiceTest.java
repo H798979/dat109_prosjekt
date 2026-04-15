@@ -1,4 +1,4 @@
-package dat109.prosjekt3;
+package dat109.prosjekt;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,12 +8,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import dat109.prosjekt3.Controller.TilbakemeldingService;
-import dat109.prosjekt3.Repo.StatistikkResponse;
-import dat109.prosjekt3.Repo.TilbakemeldingRepo;
-import dat109.prosjekt3.Repo.TilbakemeldingVerdi;
-import dat109.prosjekt3.entity.Forelesning;
-import dat109.prosjekt3.entity.Tilbakemelding;
+import dat109.prosjekt.Controller.TilbakemeldingService;
+import dat109.prosjekt.Repo.StatistikkResponse;
+import dat109.prosjekt.Repo.TilbakemeldingRepo;
+import dat109.prosjekt.Repo.TilbakemeldingVerdi;
+import dat109.prosjekt.entity.Forelesning;
+import dat109.prosjekt.entity.Tilbakemelding;
 
 import java.time.LocalDateTime;
 

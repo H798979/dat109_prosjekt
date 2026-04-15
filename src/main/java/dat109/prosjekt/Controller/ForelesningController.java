@@ -1,12 +1,12 @@
-package dat109.prosjekt3.Controller;
+package dat109.prosjekt.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import dat109.prosjekt3.Repo.ForelesningRepo;
-import dat109.prosjekt3.entity.Forelesning;
+import dat109.prosjekt.Repo.ForelesningRepo;
+import dat109.prosjekt.entity.Forelesning;
 
 import java.util.List;
 import java.util.Map;

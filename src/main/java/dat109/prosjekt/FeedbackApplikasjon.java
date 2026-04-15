@@ -1,4 +1,4 @@
-package dat109.prosjekt3;
+package dat109.prosjekt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

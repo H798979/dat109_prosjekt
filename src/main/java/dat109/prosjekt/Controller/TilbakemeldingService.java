@@ -1,13 +1,13 @@
-package dat109.prosjekt3.Controller;
+package dat109.prosjekt.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dat109.prosjekt3.Repo.StatistikkResponse;
-import dat109.prosjekt3.Repo.TilbakemeldingRepo;
-import dat109.prosjekt3.Repo.TilbakemeldingVerdi;
-import dat109.prosjekt3.entity.Forelesning;
-import dat109.prosjekt3.entity.Tilbakemelding;
+import dat109.prosjekt.Repo.StatistikkResponse;
+import dat109.prosjekt.Repo.TilbakemeldingRepo;
+import dat109.prosjekt.Repo.TilbakemeldingVerdi;
+import dat109.prosjekt.entity.Forelesning;
+import dat109.prosjekt.entity.Tilbakemelding;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

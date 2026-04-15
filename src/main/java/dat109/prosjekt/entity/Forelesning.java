@@ -1,4 +1,4 @@
-package dat109.prosjekt3.entity;
+package dat109.prosjekt.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
