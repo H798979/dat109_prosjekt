@@ -1,67 +1,61 @@
 package dat109.prosjekt.Repo;
 
-/**
- * Dataklasse som held statistikk for tilbakemeldingar på ei forelesning.
- * Inneheld antal grøne, gule og raude vurderingar, samt totalt antal.
- */
 public class StatistikkResponse {
 
-    private long groenn;
+    private long gronn;
     private long gul;
-    private long roed;
+    private long rod;
     private long totalt;
 
     /**
-     * Opprettar eit nytt statistikk-objekt.
-     *
-     * @param groenn antal grøne tilbakemeldingar
-     * @param gul    antal gule tilbakemeldingar
-     * @param roed   antal raude tilbakemeldingar
-     * @param totalt totalt antal tilbakemeldingar
+     * @param gronn
+     * @param gul
+     * @param rod
+     * @param totalt
      */
-    public StatistikkResponse(long groenn, long gul, long roed, long totalt) {
-        this.groenn = groenn;
+    public StatistikkResponse(long gronn, long gul, long rod, long totalt) {
+        this.gronn = gronn;
         this.gul = gul;
-        this.roed = roed;
+        this.rod = rod;
         this.totalt = totalt;
     }
 
-    /** @return antal grøne tilbakemeldingar */
-    public long getGroenn() { 
-        return groenn;
+    /** @return */
+    public long getgronn() { 
+        return gronn;
         }
 
-    /** @return antal gule tilbakemeldingar */
+    /** @return */
      public long getGul() { 
         return gul; 
         }
 
-    /** @return antal raude tilbakemeldingar */
-    public long getRoed() { 
-        return roed; 
+    /** @return */
+    public long getrod() { 
+        return rod; 
         }
 
-    /** @return totalt antal tilbakemeldingar */
+    /** @return */
     public long getTotalt() { 
         return totalt; 
         }
 
-    /** @param groenn antal grøne tilbakemeldingar */
-    public void setGroenn(long groenn) { 
-        this.groenn = groenn; 
+    /** @param gronn */
+    public void setgronn(long gronn) { 
+        this.gronn = gronn; 
         }
 
-    /** @param gul antal gule tilbakemeldingar */
+    /** @param gul */
     public void setGul(long gul) { 
         this.gul = gul; 
         }
 
-    /** @param roed antal raude tilbakemeldingar */
-    public void setRoed(long roed) { 
-        this.roed = roed; 
+    /** @param rod */
+    public void setrod(long rod) { 
+        this.rod = rod; 
         }
 
-    /** @param totalt totalt antal tilbakemeldingar */
+    /** @param totalt */
     public void setTotalt(long totalt) { 
         this.totalt = totalt;
  }

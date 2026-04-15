@@ -5,10 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-/**
- * Hovudklassen for feedback-applikasjonen.
- * Utvidar {@link SpringBootServletInitializer} for å støtte WAR-deployment på ekstern TomEE-server.
- */
 @SpringBootApplication
 public class FeedbackApplikasjon extends SpringBootServletInitializer {
 

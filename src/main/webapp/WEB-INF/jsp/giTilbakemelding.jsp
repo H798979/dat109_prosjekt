@@ -13,9 +13,9 @@
         button { margin-top: 20px; padding: 10px 20px; background-color: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; }
         button:hover { background-color: #004999; }
         a { color: #0066cc; }
-        .vurdering-groenn { color: #4CAF50; }
+        .vurdering-gronn { color: #4CAF50; }
         .vurdering-gul { color: #FFC107; }
-        .vurdering-roed { color: #F44336; }
+        .vurdering-rod { color: #F44336; }
     </style>
 </head>
 <body>
@@ -34,13 +34,13 @@
             <option value="">-- Vel vurdering --</option>
             <c:forEach var="v" items="${vurderinger}">
                 <c:choose>
-                    <c:when test="${v == 'GROENN'}">
+                    <c:when test="${v == 'gronn'}">
                         <option value="${v}">Grøn (bra)</option>
                     </c:when>
                     <c:when test="${v == 'GUL'}">
                         <option value="${v}">Gul (middels)</option>
                     </c:when>
-                    <c:when test="${v == 'ROED'}">
+                    <c:when test="${v == 'rod'}">
                         <option value="${v}">Raud (dårleg)</option>
                     </c:when>
                     <c:otherwise>

@@ -13,9 +13,9 @@
         th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
         th { background-color: #f0f0f0; }
         .bar { height: 20px; display: inline-block; border-radius: 3px; }
-        .groenn { background-color: #4CAF50; }
+        .gronn { background-color: #4CAF50; }
         .gul { background-color: #FFC107; }
-        .roed { background-color: #F44336; }
+        .rod { background-color: #F44336; }
         a { color: #0066cc; }
     </style>
 </head>
@@ -51,13 +51,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:set var="breiddeGroenn" value="${statistikk.groenn * 200 / statistikk.totalt}" />
+                    <c:set var="breiddegronn" value="${statistikk.gronn * 200 / statistikk.totalt}" />
                     <c:set var="breiddeGul" value="${statistikk.gul * 200 / statistikk.totalt}" />
-                    <c:set var="breiddeRoed" value="${statistikk.roed * 200 / statistikk.totalt}" />
+                    <c:set var="breidderod" value="${statistikk.rod * 200 / statistikk.totalt}" />
                     <tr>
                         <td>Grøn</td>
-                        <td>${statistikk.groenn}</td>
-                        <td><span class="bar groenn" data-width="${breiddeGroenn}">&nbsp;</span></td>
+                        <td>${statistikk.gronn}</td>
+                        <td><span class="bar gronn" data-width="${breiddegronn}">&nbsp;</span></td>
                     </tr>
                     <tr>
                         <td>Gul</td>
@@ -66,8 +66,8 @@
                     </tr>
                     <tr>
                         <td>Raud</td>
-                        <td>${statistikk.roed}</td>
-                        <td><span class="bar roed" data-width="${breiddeRoed}">&nbsp;</span></td>
+                        <td>${statistikk.rod}</td>
+                        <td><span class="bar rod" data-width="${breidderod}">&nbsp;</span></td>
                     </tr>
                 </tbody>
             </table>

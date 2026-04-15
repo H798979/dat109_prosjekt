@@ -14,10 +14,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Controller som handterer visning og oppretting av forelesningar.
- * Bruker JSP-views via Spring MVC sin view resolver.
- */
 @Controller
 @RequestMapping("/forelesninger")
 public class ForelesningController {
@@ -26,10 +22,8 @@ public class ForelesningController {
     @Autowired TilbakemeldingService tilbakemeldingService;
 
     /**
-     * Hentar alle forelesningar og sender dei til forelesninger.jsp.
-     *
-     * @param model modellobjekt for å sende data til JSP
-     * @return view-namn "forelesninger"
+     * @param model
+     * @return
      */
     @GetMapping
     public String hentAlle(Model model) {
@@ -39,13 +33,10 @@ public class ForelesningController {
     }
 
     /**
-     * Hentar ei enkelt forelesning med tilhøyrande statistikk og sender til forelesning.jsp.
-     * Dersom forelesinga ikkje finst, blir brukaren omdirigert med feilmelding.
-     *
-     * @param id  ID-en til forelesinga
-     * @param model modellobjekt for data til JSP
-     * @param ra   RedirectAttributes for flash-meldingar ved redirect
-     * @return view-namn "forelesning", eller redirect til /forelesninger ved feil
+     * @param id
+     * @param model
+     * @param ra
+     * @return
      */
     @GetMapping("/vis")
     public String hentMedId(@RequestParam Long id, Model model, RedirectAttributes ra) {
@@ -60,13 +51,11 @@ public class ForelesningController {
     }
 
     /**
-     * Opprettar ei ny forelesning basert på skjemadata og lagrar ho i databasen.
-     *
-     * @param namn       namnet på forelesinga
-     * @param tidspunkt  dato og klokkeslett frå datetime-local inputfeltet
-     * @param sted       staden der forelesinga blir halden
-     * @param ra         RedirectAttributes for kvitteringsmelding
-     * @return redirect til forelesningslista
+     * @param namn
+     * @param tidspunkt
+     * @param sted
+     * @param ra
+     * @return
      */
     @PostMapping("/opprett")
     public String opprett(@RequestParam String namn,

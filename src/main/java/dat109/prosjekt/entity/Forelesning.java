@@ -5,10 +5,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Entitet som representerer ei forelesning.
- * Kvar forelesning har eit namn, tidspunkt, stad, og ei liste med tilbakemeldingar.
- */
 @Entity
 public class Forelesning {
 
@@ -22,15 +18,12 @@ public class Forelesning {
     @OneToMany(mappedBy = "forelesning", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tilbakemelding> tilbakemeldinger = new ArrayList<>();
 
-    /** Standardkonstruktør kravd av JPA. */
     public Forelesning() {}
 
     /**
-     * Opprettar ei ny forelesning.
-     *
-     * @param navn       namnet på forelesinga
-     * @param tidspunkt  dato og klokkeslett for forelesinga
-     * @param sted       staden der forelesinga blir halden
+     * @param navn
+     * @param tidspunkt
+     * @param sted
      */
     public Forelesning(String navn, LocalDateTime tidspunkt, String sted) {
         this.navn = navn;
@@ -38,52 +31,52 @@ public class Forelesning {
         this.sted = sted;
     }
 
-    /** @return unik ID for forelesinga */
+    /** @return */
     public Long getId() {
         return id;
         }
 
-    /** @param id unik ID */
+    /** @param id */
     public void setId(Long id) {
         this.id = id;
         }
 
-    /** @return namnet på forelesinga */
+    /** @return */
     public String getNavn() {
         return navn;
         }
 
-    /** @param navn namnet på forelesinga */
+    /** @param navn */
     public void setNavn(String navn) {
         this.navn = navn;
         }
 
-    /** @return tidspunktet for forelesinga */
+    /** @return */
     public LocalDateTime getTidspunkt() {
         return tidspunkt;
         }
 
-    /** @param tidspunkt dato og klokkeslett for forelesinga */
+    /** @param tidspunkt */
     public void setTidspunkt(LocalDateTime tidspunkt) {
         this.tidspunkt = tidspunkt;
         }
 
-    /** @return staden for forelesinga */
+    /** @return */
     public String getSted() {
         return sted;
         }
 
-    /** @param sted staden for forelesinga */
+    /** @param sted */
     public void setSted(String sted) {
         this.sted = sted;
         }
 
-    /** @return lista over tilbakemeldingar knytt til forelesinga */
+    /** @return */
     public List<Tilbakemelding> getTilbakemeldinger() {
         return tilbakemeldinger;
         }
 
-    /** @param t lista over tilbakemeldingar */
+    /** @param t */
     public void setTilbakemeldinger(List<Tilbakemelding> t) {
         this.tilbakemeldinger = t;
         }

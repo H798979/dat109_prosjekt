@@ -3,11 +3,6 @@ package dat109.prosjekt.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-/**
- * Entitet som representerer ei tilbakemelding frå ein student på ei forelesning.
- * Kvar tilbakemelding inneheld ei vurdering (grøn/gul/raud), tidspunkt for innsending,
- * referanse til forelesinga, og ein hasha student-token for å hindre duplikat.
- */
 @Entity
 public class Tilbakemelding {
 
@@ -26,16 +21,13 @@ public class Tilbakemelding {
     @Column(nullable = false)
     private String studentTokenHash;
 
-    /** Standardkonstruktør kravd av JPA. */
     public Tilbakemelding() {}
 
     /**
-     * Opprettar ei ny tilbakemelding.
-     *
-     * @param vurdering        vurderinga studenten gir (GROENN, GUL eller ROED)
-     * @param innsendt         tidspunktet tilbakemeldinga blei sendt inn
-     * @param forelesning      forelesinga tilbakemeldinga gjeld
-     * @param studentTokenHash SHA-256-hash av studentens unike token
+     * @param vurdering
+     * @param innsendt
+     * @param forelesning
+     * @param studentTokenHash
      */
     public Tilbakemelding(TilbakemeldingVerdi vurdering, LocalDateTime innsendt,
                           Forelesning forelesning, String studentTokenHash) {
@@ -45,52 +37,52 @@ public class Tilbakemelding {
         this.studentTokenHash = studentTokenHash;
     }
 
-    /** @return unik ID for tilbakemeldinga */
+    /** @return */
     public Long getId() {
         return id;
         }
 
-    /** @param id unik ID */
+    /** @param id */
     public void setId(Long id) {
         this.id = id;
         }
 
-    /** @return vurderinga studenten gav */
+    /** @return */
     public TilbakemeldingVerdi getVurdering() {
         return vurdering;
         }
 
-    /** @param vurdering vurderinga som skal settast */
+    /** @param vurdering */
     public void setVurdering(TilbakemeldingVerdi vurdering) {
         this.vurdering = vurdering;
         }
 
-    /** @return tidspunktet tilbakemeldinga blei sendt inn */
+    /** @return */
     public LocalDateTime getInnsendt() {
         return innsendt;
         }
 
-    /** @param innsendt tidspunkt for innsending */
+    /** @param innsendt */
     public void setInnsendt(LocalDateTime innsendt) {
         this.innsendt = innsendt;
         }
 
-    /** @return forelesinga tilbakemeldinga er knytt til */
+    /** @return */
     public Forelesning getForelesning() {
         return forelesning;
         }
 
-    /** @param forelesning forelesinga tilbakemeldinga gjeld */
+    /** @param forelesning */
     public void setForelesning(Forelesning forelesning) {
         this.forelesning = forelesning;
         }
 
-    /** @return SHA-256-hash av studentens token */
+    /** @return */
     public String getStudentTokenHash() {
         return studentTokenHash;
         }
 
-    /** @param s SHA-256-hash av studentens token */
+    /** @param s */
     public void setStudentTokenHash(String s) {
         this.studentTokenHash = s;
         }
