@@ -51,20 +51,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <c:set var="breiddeGroenn" value="${statistikk.groenn * 200 / statistikk.totalt}" />
+                    <c:set var="breiddeGul" value="${statistikk.gul * 200 / statistikk.totalt}" />
+                    <c:set var="breiddeRoed" value="${statistikk.roed * 200 / statistikk.totalt}" />
                     <tr>
                         <td>Grøn</td>
                         <td>${statistikk.groenn}</td>
-                        <td><span class="bar groenn" style="width: ${statistikk.totalt > 0 ? (statistikk.groenn * 200 / statistikk.totalt) : 0}px;">&nbsp;</span></td>
+                        <td><span class="bar groenn" data-width="${breiddeGroenn}">&nbsp;</span></td>
                     </tr>
                     <tr>
                         <td>Gul</td>
                         <td>${statistikk.gul}</td>
-                        <td><span class="bar gul" style="width: ${statistikk.totalt > 0 ? (statistikk.gul * 200 / statistikk.totalt) : 0}px;">&nbsp;</span></td>
+                        <td><span class="bar gul" data-width="${breiddeGul}">&nbsp;</span></td>
                     </tr>
                     <tr>
                         <td>Raud</td>
                         <td>${statistikk.roed}</td>
-                        <td><span class="bar roed" style="width: ${statistikk.totalt > 0 ? (statistikk.roed * 200 / statistikk.totalt) : 0}px;">&nbsp;</span></td>
+                        <td><span class="bar roed" data-width="${breiddeRoed}">&nbsp;</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -77,5 +80,10 @@
         |
         <a href="${pageContext.request.contextPath}/forelesninger">Tilbake til oversikt</a>
     </p>
+    <script>
+        document.querySelectorAll('.bar[data-width]').forEach(function(el) {
+            el.style.width = el.getAttribute('data-width') + 'px';
+        });
+    </script>
 </body>
 </html>

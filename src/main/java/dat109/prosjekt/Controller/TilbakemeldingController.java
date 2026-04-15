@@ -13,6 +13,10 @@ import dat109.prosjekt.entity.TilbakemeldingVerdi;
 
 import java.util.Optional;
 
+/**
+ * Controller som handterer innsending av tilbakemeldingar frå studentar.
+ * Viser tilbakemeldingsskjema og tek imot vurderingar via POST.
+ */
 @Controller
 @RequestMapping("/tilbakemelding")
 public class TilbakemeldingController {
@@ -20,6 +24,14 @@ public class TilbakemeldingController {
     @Autowired TilbakemeldingService tilbakemeldingService;
     @Autowired ForelesningRepo forelesningRepo;
 
+    /**
+     * Viser skjemaet for å gi tilbakemelding på ei forelesning.
+     *
+     * @param forelesningId ID-en til forelesinga det gjeld
+     * @param model         modellobjekt for data til JSP
+     * @param ra            RedirectAttributes for flash-meldingar ved feil
+     * @return view-namn "giTilbakemelding", eller redirect ved ugyldig forelesning
+     */
     @GetMapping("/skjema")
     public String visSkjema(@RequestParam Long forelesningId, Model model, RedirectAttributes ra) {
         Optional<Forelesning> opt = forelesningRepo.findById(forelesningId);
@@ -32,6 +44,17 @@ public class TilbakemeldingController {
         return "giTilbakemelding";
     }
 
+    /**
+     * Tek imot ei tilbakemelding frå ein student og registrerer ho i databasen.
+     * Validerer at forelesinga finst, at vurderinga er gyldig, og at studenten
+     * ikkje allereie har gitt tilbakemelding (via hasha token).
+     *
+     * @param forelesningId ID-en til forelesinga
+     * @param vurdering     vurderinga som streng (GROENN, GUL eller ROED)
+     * @param studentToken  studentens unike token
+     * @param ra            RedirectAttributes for kvittering eller feilmelding
+     * @return redirect til forelesningssida med resultatmelding
+     */
     @PostMapping("/send")
     public String giTilbakemelding(@RequestParam Long forelesningId,
                                    @RequestParam String vurdering,

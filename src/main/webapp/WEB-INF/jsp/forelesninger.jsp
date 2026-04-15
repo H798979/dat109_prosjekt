@@ -15,7 +15,7 @@
         a { color: #0066cc; }
         form { margin-top: 30px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
         label { display: block; margin-top: 10px; font-weight: bold; }
-        input[type="text"] { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+        input[type="text"], input[type="datetime-local"] { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
         button { margin-top: 15px; padding: 10px 20px; background-color: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; }
         button:hover { background-color: #004999; }
     </style>
@@ -68,6 +68,9 @@
     <form method="post" action="${pageContext.request.contextPath}/forelesninger/opprett">
         <label for="namn">Namn:</label>
         <input type="text" id="namn" name="namn" required>
+
+        <label for="tidspunkt">Tidspunkt:</label>
+        <input type="datetime-local" id="tidspunkt" name="tidspunkt" required>
 
         <label for="sted">Stad:</label>
         <input type="text" id="sted" name="sted" required>

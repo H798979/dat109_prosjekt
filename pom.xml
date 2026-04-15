@@ -15,6 +15,7 @@
     <groupId>com.dat109</groupId>
     <artifactId>feedback</artifactId>
     <version>1.0.0</version>
+    <packaging>war</packaging>
     <name>feedback</name>
     <description>Forelesnings-feedback-system – DAT109 Gruppe 12, Milepæl 2</description>
 
@@ -23,10 +24,17 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Web (REST) -->
+        <!-- Spring Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Embedded Tomcat – provided sidan TomEE har eigen servlet-container -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Spring Data JPA -->
@@ -35,20 +43,12 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- H2 in-memory database (aktiv for lokal testing) -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- PostgreSQL (bytt til denne når du skal bruke PostgreSQL)
+        <!-- PostgreSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        -->
 
         <!-- JSP-støtte -->
         <dependency>

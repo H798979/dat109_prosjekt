@@ -4,7 +4,7 @@
 <html lang="no">
 <head>
     <meta charset="UTF-8">
-    <title>Gi tilbakemelding – ${forelesning.namn}</title>
+    <title>Gi tilbakemelding – ${forelesning.navn}</title>
     <style>
         body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
         .feil { color: red; font-weight: bold; }
