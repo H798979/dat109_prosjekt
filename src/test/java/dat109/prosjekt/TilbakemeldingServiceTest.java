@@ -8,9 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import dat109.prosjekt.Repo.StatistikkResponse;
 import dat109.prosjekt.Repo.TilbakemeldingRepo;
 import dat109.prosjekt.Service.TilbakemeldingService;
+import dat109.prosjekt.dto.StatistikkDto;
 import dat109.prosjekt.entity.Forelesning;
 import dat109.prosjekt.entity.Tilbakemelding;
 import dat109.prosjekt.entity.TilbakemeldingVerdi;
@@ -72,7 +72,7 @@ class TilbakemeldingServiceTest {
         when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.gronn)).thenReturn(5L);
         when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.GUL)).thenReturn(3L);
         when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.rod)).thenReturn(1L);
-        StatistikkResponse s = tjeneste.hentStatistikk(1L);
+        StatistikkDto s = tjeneste.hentStatistikk(1L);
 
         assertEquals(5, s.getgronn());
         assertEquals(3, s.getGul());

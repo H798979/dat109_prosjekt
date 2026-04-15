@@ -1,6 +1,6 @@
-package dat109.prosjekt.Repo;
+package dat109.prosjekt.dto;
 
-public class StatistikkResponse {
+public class StatistikkDto {
 
     private long gronn;
     private long gul;
@@ -13,7 +13,7 @@ public class StatistikkResponse {
      * @param rod
      * @param totalt
      */
-    public StatistikkResponse(long gronn, long gul, long rod, long totalt) {
+    public StatistikkDto(long gronn, long gul, long rod, long totalt) {
         this.gronn = gronn;
         this.gul = gul;
         this.rod = rod;
