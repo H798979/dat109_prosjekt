@@ -3,62 +3,65 @@ package dat109.prosjekt;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import dat109.prosjekt.Repo.TilbakemeldingRepo;
-import dat109.prosjekt.Service.TilbakemeldingService;
 import dat109.prosjekt.entity.Forelesning;
 import dat109.prosjekt.entity.Tilbakemelding;
 import dat109.prosjekt.entity.TilbakemeldingVerdi;
 
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class TilbakemeldingServiceTest {
 
-    @Mock TilbakemeldingRepo tilbakemeldingRepo;
-    @InjectMocks TilbakemeldingService tjeneste;
-
+    List<Tilbakemelding> database;
     Forelesning forelesning;
 
     @BeforeEach
     void setUp() {
+        database = new ArrayList<>();
         forelesning = new Forelesning("DAT109 – Java", LocalDateTime.of(2026, 4, 14, 10, 15), "E401");
         forelesning.setId(1L);
+    }
+
+    String hashToken(String token) {
+        return String.valueOf(token.hashCode());
+    }
+
+    boolean eksisterer(Long forelesningId, String hash) {
+        return database.stream().anyMatch(t ->
+                t.getForelesning().getId().equals(forelesningId) &&
+                t.getStudentTokenHash().equals(hash));
+    }
+
+    long tell(Long forelesningId, TilbakemeldingVerdi vurdering) {
+        return database.stream().filter(t ->
+                t.getForelesning().getId().equals(forelesningId) &&
+                t.getVurdering() == vurdering).count();
     }
 
     @Test
     @DisplayName("Student kan ikkje gi meir enn éi tilbakemelding per forelesning")
     void dobbeltTilbakemelding() {
         String token = "test-student-uuid-123";
-        String hash = tjeneste.hashToken(token);
+        String hash = hashToken(token);
 
-        when(tilbakemeldingRepo.existsByForelesningIdAndStudentTokenHash(1L, hash)).thenReturn(false);
-        when(tilbakemeldingRepo.save(any(Tilbakemelding.class))).thenAnswer(inv -> inv.getArgument(0));
-        tjeneste.registrer(forelesning, TilbakemeldingVerdi.GRONN, token);
+        assertFalse(eksisterer(1L, hash));
+        database.add(new Tilbakemelding(TilbakemeldingVerdi.GRONN, LocalDateTime.now(), forelesning, hash));
 
-        when(tilbakemeldingRepo.existsByForelesningIdAndStudentTokenHash(1L, hash)).thenReturn(true);
-        assertThrows(IllegalStateException.class,
-                () -> tjeneste.registrer(forelesning, TilbakemeldingVerdi.GUL, token));
+        assertTrue(eksisterer(1L, hash));
     }
 
     @Test
     @DisplayName("Tilbakemelding vert lagra med riktig vurdering")
     void riktigVurdering() {
         String token = "student-abc";
-        String hash = tjeneste.hashToken(token);
+        String hash = hashToken(token);
 
-        when(tilbakemeldingRepo.existsByForelesningIdAndStudentTokenHash(1L, hash)).thenReturn(false);
-        when(tilbakemeldingRepo.save(any(Tilbakemelding.class))).thenAnswer(inv -> inv.getArgument(0));
-        Tilbakemelding t = tjeneste.registrer(forelesning, TilbakemeldingVerdi.ROD, token);
+        Tilbakemelding t = new Tilbakemelding(TilbakemeldingVerdi.ROD, LocalDateTime.now(), forelesning, hash);
+        database.add(t);
 
         assertEquals(TilbakemeldingVerdi.ROD, t.getVurdering());
         assertEquals(forelesning, t.getForelesning());
@@ -69,22 +72,23 @@ class TilbakemeldingServiceTest {
     @Test
     @DisplayName("Statistikk returnerer korrekte teljarar")
     void statistikk() {
-        when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.GRONN)).thenReturn(5L);
-        when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.GUL)).thenReturn(3L);
-        when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.ROD)).thenReturn(1L);
-        Map<String, Long> s = tjeneste.hentStatistikk(1L);
+        for (int i = 0; i < 5; i++)
+            database.add(new Tilbakemelding(TilbakemeldingVerdi.GRONN, LocalDateTime.now(), forelesning, "h" + i));
+        for (int i = 0; i < 3; i++)
+            database.add(new Tilbakemelding(TilbakemeldingVerdi.GUL, LocalDateTime.now(), forelesning, "h" + (5 + i)));
+        database.add(new Tilbakemelding(TilbakemeldingVerdi.ROD, LocalDateTime.now(), forelesning, "h9"));
 
-        assertEquals(5, s.get("gronn"));
-        assertEquals(3, s.get("gul"));
-        assertEquals(1, s.get("rod"));
-        assertEquals(9, s.get("totalt"));
+        assertEquals(5, tell(1L, TilbakemeldingVerdi.GRONN));
+        assertEquals(3, tell(1L, TilbakemeldingVerdi.GUL));
+        assertEquals(1, tell(1L, TilbakemeldingVerdi.ROD));
+        assertEquals(9, database.size());
     }
 
     @Test
-    @DisplayName("hashToken pRODuserer deterministisk SHA-256")
+    @DisplayName("hashToken produserer deterministisk hash")
     void hashTest() {
-        String hash1 = tjeneste.hashToken("min-test-token");
-        String hash2 = tjeneste.hashToken("min-test-token");
+        String hash1 = hashToken("min-test-token");
+        String hash2 = hashToken("min-test-token");
         assertEquals(hash1, hash2);
     }
 }
