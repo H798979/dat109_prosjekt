@@ -25,6 +25,8 @@ public class ForelesningController {
      * @param model
      * @return
      */
+
+
     @GetMapping
     public String hentAlle(Model model) {
         List<Forelesning> forelesninger = forelesningRepo.findAll();
@@ -38,6 +40,8 @@ public class ForelesningController {
      * @param ra
      * @return
      */
+
+
     @GetMapping("/vis")
     public String hentMedId(@RequestParam Long id, Model model, RedirectAttributes ra) {
         Optional<Forelesning> opt = forelesningRepo.findById(id);
@@ -57,6 +61,8 @@ public class ForelesningController {
      * @param ra
      * @return
      */
+    
+
     @PostMapping("/opprett")
     public String opprett(@RequestParam String namn,
                           @RequestParam String tidspunkt,
