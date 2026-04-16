@@ -6,14 +6,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class FeedbackApplikasjon extends SpringBootServletInitializer {
+public class Applikasjon extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(FeedbackApplikasjon.class);
+        return application.sources(Applikasjon.class);
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(FeedbackApplikasjon.class, args);
+        SpringApplication.run(Applikasjon.class, args);
     }
 }
