@@ -43,7 +43,7 @@ class TilbakemeldingServiceTest {
 
         when(tilbakemeldingRepo.existsByForelesningIdAndStudentTokenHash(1L, hash)).thenReturn(false);
         when(tilbakemeldingRepo.save(any(Tilbakemelding.class))).thenAnswer(inv -> inv.getArgument(0));
-        tjeneste.registrer(forelesning, TilbakemeldingVerdi.gronn, token);
+        tjeneste.registrer(forelesning, TilbakemeldingVerdi.GRONN, token);
 
         when(tilbakemeldingRepo.existsByForelesningIdAndStudentTokenHash(1L, hash)).thenReturn(true);
         assertThrows(IllegalStateException.class,
@@ -58,9 +58,9 @@ class TilbakemeldingServiceTest {
 
         when(tilbakemeldingRepo.existsByForelesningIdAndStudentTokenHash(1L, hash)).thenReturn(false);
         when(tilbakemeldingRepo.save(any(Tilbakemelding.class))).thenAnswer(inv -> inv.getArgument(0));
-        Tilbakemelding t = tjeneste.registrer(forelesning, TilbakemeldingVerdi.rod, token);
+        Tilbakemelding t = tjeneste.registrer(forelesning, TilbakemeldingVerdi.ROD, token);
 
-        assertEquals(TilbakemeldingVerdi.rod, t.getVurdering());
+        assertEquals(TilbakemeldingVerdi.ROD, t.getVurdering());
         assertEquals(forelesning, t.getForelesning());
         assertEquals(hash, t.getStudentTokenHash());
         assertNotNull(t.getInnsendt());
@@ -69,19 +69,19 @@ class TilbakemeldingServiceTest {
     @Test
     @DisplayName("Statistikk returnerer korrekte teljarar")
     void statistikk() {
-        when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.gronn)).thenReturn(5L);
+        when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.GRONN)).thenReturn(5L);
         when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.GUL)).thenReturn(3L);
-        when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.rod)).thenReturn(1L);
+        when(tilbakemeldingRepo.countByForelesningIdAndVurdering(1L, TilbakemeldingVerdi.ROD)).thenReturn(1L);
         StatistikkDto s = tjeneste.hentStatistikk(1L);
 
-        assertEquals(5, s.getgronn());
+        assertEquals(5, s.getGronn());
         assertEquals(3, s.getGul());
-        assertEquals(1, s.getrod());
+        assertEquals(1, s.getRod());
         assertEquals(9, s.getTotalt());
     }
 
     @Test
-    @DisplayName("hashToken produserer deterministisk SHA-256")
+    @DisplayName("hashToken pRODuserer deterministisk SHA-256")
     void hashTest() {
         String hash1 = tjeneste.hashToken("min-test-token");
         String hash2 = tjeneste.hashToken("min-test-token");

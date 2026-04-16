@@ -1,7 +1,7 @@
 package dat109.prosjekt.entity;
 
 public enum TilbakemeldingVerdi {
-    gronn,
+    GRONN,
     GUL,
-    rod
+    ROD
 }

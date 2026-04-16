@@ -21,7 +21,7 @@ public class StatistikkDto {
     }
 
     /** @return */
-    public long getgronn() { 
+    public long getGronn() { 
         return gronn;
         }
 
@@ -31,7 +31,7 @@ public class StatistikkDto {
         }
 
     /** @return */
-    public long getrod() { 
+    public long getRod() { 
         return rod; 
         }
 
@@ -41,7 +41,7 @@ public class StatistikkDto {
         }
 
     /** @param gronn */
-    public void setgronn(long gronn) { 
+    public void setGronn(long gronn) { 
         this.gronn = gronn; 
         }
 
@@ -51,7 +51,7 @@ public class StatistikkDto {
         }
 
     /** @param rod */
-    public void setrod(long rod) { 
+    public void setRod(long rod) { 
         this.rod = rod; 
         }
 

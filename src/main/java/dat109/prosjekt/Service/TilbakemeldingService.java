@@ -40,9 +40,9 @@ public class TilbakemeldingService {
      * @return
      */
     public StatistikkDto hentStatistikk(Long forelesningId) {
-        long g = tilbakemeldingRepo.countByForelesningIdAndVurdering(forelesningId, TilbakemeldingVerdi.gronn);
+        long g = tilbakemeldingRepo.countByForelesningIdAndVurdering(forelesningId, TilbakemeldingVerdi.GRONN);
         long u = tilbakemeldingRepo.countByForelesningIdAndVurdering(forelesningId, TilbakemeldingVerdi.GUL);
-        long r = tilbakemeldingRepo.countByForelesningIdAndVurdering(forelesningId, TilbakemeldingVerdi.rod);
+        long r = tilbakemeldingRepo.countByForelesningIdAndVurdering(forelesningId, TilbakemeldingVerdi.ROD);
         return new StatistikkDto(g, u, r, g + u + r);
     }
 

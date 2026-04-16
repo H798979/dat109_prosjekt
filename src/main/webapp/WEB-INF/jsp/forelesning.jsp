@@ -1,32 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<!DOCTYPE html>
-<html lang="no">
-<head>
-    <meta charset="UTF-8">
-    <title>Forelesning – ${forelesning.navn}</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        .melding { color: green; font-weight: bold; }
-        .feil { color: red; font-weight: bold; }
-        table { border-collapse: collapse; margin-top: 15px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #f0f0f0; }
-        .bar { height: 20px; display: inline-block; border-radius: 3px; }
-        .gronn { background-color: #4CAF50; }
-        .gul { background-color: #FFC107; }
-        .rod { background-color: #F44336; }
-        a { color: #0066cc; }
-    </style>
-</head>
+
 <body>
-    <h1>${forelesning.navn}</h1>
+    <h1>${forelesning.namn}</h1>
 
     <c:if test="${not empty melding}">
-        <p class="melding">${melding}</p>
+        <p style="color:green">${melding}</p>
     </c:if>
     <c:if test="${not empty feil}">
-        <p class="feil">${feil}</p>
+        <p style="color:red">${feil}</p>
     </c:if>
 
     <table>
@@ -43,35 +25,27 @@
         </c:when>
         <c:otherwise>
             <table>
-                <thead>
-                    <tr>
-                        <th>Vurdering</th>
-                        <th>Antal</th>
-                        <th>Fordeling</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:set var="breiddegronn" value="${statistikk.gronn * 200 / statistikk.totalt}" />
-                    <c:set var="breiddeGul" value="${statistikk.gul * 200 / statistikk.totalt}" />
-                    <c:set var="breidderod" value="${statistikk.rod * 200 / statistikk.totalt}" />
-                    <tr>
-                        <td>Grøn</td>
-                        <td>${statistikk.gronn}</td>
-                        <td><span class="bar gronn" data-width="${breiddegronn}">&nbsp;</span></td>
-                    </tr>
-                    <tr>
-                        <td>Gul</td>
-                        <td>${statistikk.gul}</td>
-                        <td><span class="bar gul" data-width="${breiddeGul}">&nbsp;</span></td>
-                    </tr>
-                    <tr>
-                        <td>Raud</td>
-                        <td>${statistikk.rod}</td>
-                        <td><span class="bar rod" data-width="${breidderod}">&nbsp;</span></td>
-                    </tr>
-                </tbody>
+                <tr><th>Vurdering</th><th>Antal</th><th>Fordeling</th></tr>
+                <c:set var="breiddegronn" value="${statistikk.gronn * 200 / statistikk.totalt}" />
+                <c:set var="breiddeGul" value="${statistikk.gul * 200 / statistikk.totalt}" />
+                <c:set var="breidderod" value="${statistikk.rod * 200 / statistikk.totalt}" />
+                <tr>
+                    <td>Grøn</td>
+                    <td>${statistikk.gronn}</td>
+                    <td><span class="bar gronn" data-width="${breiddegronn}" style="height:20px;display:inline-block;background-color:#4CAF50">&nbsp;</span></td>
+                </tr>
+                <tr>
+                    <td>Gul</td>
+                    <td>${statistikk.gul}</td>
+                    <td><span class="bar gul" data-width="${breiddeGul}" style="height:20px;display:inline-block;background-color:#FFC107">&nbsp;</span></td>
+                </tr>
+                <tr>
+                    <td>Raud</td>
+                    <td>${statistikk.rod}</td>
+                    <td><span class="bar rod" data-width="${breidderod}" style="height:20px;display:inline-block;background-color:#F44336">&nbsp;</span></td>
+                </tr>
             </table>
-            <p><strong>Totalt:</strong> ${statistikk.totalt} tilbakemeldingar</p>
+            <p><b>Totalt:</b> ${statistikk.totalt} tilbakemeldingar</p>
         </c:otherwise>
     </c:choose>
 
@@ -80,10 +54,10 @@
         |
         <a href="${pageContext.request.contextPath}/forelesninger">Tilbake til oversikt</a>
     </p>
+
     <script>
         document.querySelectorAll('.bar[data-width]').forEach(function(el) {
             el.style.width = el.getAttribute('data-width') + 'px';
         });
     </script>
 </body>
-</html>
