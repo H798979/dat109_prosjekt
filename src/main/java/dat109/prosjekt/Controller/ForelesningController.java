@@ -15,19 +15,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/forelesninger")
 public class ForelesningController {
 
     @Autowired ForelesningRepo forelesningRepo;
     @Autowired TilbakemeldingService tilbakemeldingService;
 
-    /**
-     * @param model
-     * @return
-     */
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/forelesninger";
+    }
 
-
-    @GetMapping
+    @GetMapping("/forelesninger")
     public String hentAlle(Model model) {
         List<Forelesning> forelesninger = forelesningRepo.findAll();
         model.addAttribute("forelesninger", forelesninger);
@@ -42,7 +40,7 @@ public class ForelesningController {
      */
 
 
-    @GetMapping("/vis")
+    @GetMapping("/forelesninger/vis")
     public String hentMedId(@RequestParam Long id, Model model, RedirectAttributes ra) {
         Optional<Forelesning> opt = forelesningRepo.findById(id);
         if (opt.isEmpty()) {
@@ -63,7 +61,7 @@ public class ForelesningController {
      */
     
 
-    @PostMapping("/opprett")
+    @PostMapping("/forelesninger/opprett")
     public String opprett(@RequestParam String namn,
                           @RequestParam String tidspunkt,
                           @RequestParam String sted,
