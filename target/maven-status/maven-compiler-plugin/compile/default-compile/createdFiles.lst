@@ -1,0 +1,9 @@
+dat109\prosjekt\entity\Forelesning.class
+dat109\prosjekt\Service\TilbakemeldingService.class
+dat109\prosjekt\Controller\TilbakemeldingController.class
+dat109\prosjekt\entity\TilbakemeldingVerdi.class
+dat109\prosjekt\Repo\TilbakemeldingRepo.class
+dat109\prosjekt\entity\Tilbakemelding.class
+dat109\prosjekt\Repo\ForelesningRepo.class
+dat109\prosjekt\Applikasjon.class
+dat109\prosjekt\Controller\ForelesningController.class
