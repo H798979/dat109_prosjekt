@@ -16,6 +16,8 @@ public class TilbakemeldingService {
 
     @Autowired TilbakemeldingRepo tilbakemeldingRepo;
 
+
+
     /**
      * @param forelesning
      * @param vurdering
@@ -23,6 +25,7 @@ public class TilbakemeldingService {
      * @return
      * @throws IllegalStateException
      */
+
     public Tilbakemelding registrer(Forelesning forelesning, TilbakemeldingVerdi vurdering, String studentToken) {
         String hash = hashToken(studentToken);
         if (tilbakemeldingRepo.existsByForelesningIdAndStudentTokenHash(forelesning.getId(), hash)) {
@@ -32,10 +35,14 @@ public class TilbakemeldingService {
         return tilbakemeldingRepo.save(t);
     }
 
+
+
     /**
      * @param forelesningId
      * @return
      */
+
+
     public Map<String, Long> hentStatistikk(Long forelesningId) {
         long g = tilbakemeldingRepo.countByForelesningIdAndVurdering(forelesningId, TilbakemeldingVerdi.GRONN);
         long u = tilbakemeldingRepo.countByForelesningIdAndVurdering(forelesningId, TilbakemeldingVerdi.GUL);
@@ -43,10 +50,13 @@ public class TilbakemeldingService {
         return Map.of("gronn", g, "gul", u, "rod", r, "totalt", g + u + r);
     }
 
+
+    
     /**
      * @param token
      * @return
      */
+
     public String hashToken(String token) {
         return String.valueOf(token.hashCode());
     }

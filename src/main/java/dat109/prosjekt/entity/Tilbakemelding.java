@@ -29,22 +29,18 @@ public class Tilbakemelding {
      * @param forelesning
      * @param studentTokenHash
      */
-    public Tilbakemelding(TilbakemeldingVerdi vurdering, LocalDateTime innsendt,
-                          Forelesning forelesning, String studentTokenHash) {
+    public Tilbakemelding(TilbakemeldingVerdi vurdering, LocalDateTime innsendt, Forelesning forelesning, String studentTokenHash) {
         this.vurdering = vurdering;
         this.innsendt = innsendt;
         this.forelesning = forelesning;
         this.studentTokenHash = studentTokenHash;
     }
 
+
+
     /** @return */
     public Long getId() {
         return id;
-        }
-
-    /** @param id */
-    public void setId(Long id) {
-        this.id = id;
         }
 
     /** @return */
@@ -52,14 +48,32 @@ public class Tilbakemelding {
         return vurdering;
         }
 
-    /** @param vurdering */
-    public void setVurdering(TilbakemeldingVerdi vurdering) {
-        this.vurdering = vurdering;
-        }
-
     /** @return */
     public LocalDateTime getInnsendt() {
         return innsendt;
+        }
+
+    /** @return */
+    public Forelesning getForelesning() {
+        return forelesning;
+        } 
+        
+    /** @return */
+    public String getStudentTokenHash() {
+        return studentTokenHash;
+        }
+
+
+
+
+    /** @param id */
+    public void setId(Long id) {
+        this.id = id;
+        }
+
+    /** @param vurdering */
+    public void setVurdering(TilbakemeldingVerdi vurdering) {
+        this.vurdering = vurdering;
         }
 
     /** @param innsendt */
@@ -67,19 +81,9 @@ public class Tilbakemelding {
         this.innsendt = innsendt;
         }
 
-    /** @return */
-    public Forelesning getForelesning() {
-        return forelesning;
-        }
-
     /** @param forelesning */
     public void setForelesning(Forelesning forelesning) {
         this.forelesning = forelesning;
-        }
-
-    /** @return */
-    public String getStudentTokenHash() {
-        return studentTokenHash;
         }
 
     /** @param s */
