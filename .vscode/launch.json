@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Applikasjon<feedback>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "dat109.prosjekt.Applikasjon",
+            "projectName": "feedback",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
