@@ -4,14 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dat109.prosjekt.Repo.TilbakemeldingRepo;
-import dat109.prosjekt.dto.StatistikkDto;
 import dat109.prosjekt.entity.Forelesning;
 import dat109.prosjekt.entity.Tilbakemelding;
 import dat109.prosjekt.entity.TilbakemeldingVerdi;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 import java.time.LocalDateTime;
 
 @Service
@@ -39,29 +36,18 @@ public class TilbakemeldingService {
      * @param forelesningId
      * @return
      */
-    public StatistikkDto hentStatistikk(Long forelesningId) {
+    public Map<String, Long> hentStatistikk(Long forelesningId) {
         long g = tilbakemeldingRepo.countByForelesningIdAndVurdering(forelesningId, TilbakemeldingVerdi.GRONN);
         long u = tilbakemeldingRepo.countByForelesningIdAndVurdering(forelesningId, TilbakemeldingVerdi.GUL);
         long r = tilbakemeldingRepo.countByForelesningIdAndVurdering(forelesningId, TilbakemeldingVerdi.ROD);
-        return new StatistikkDto(g, u, r, g + u + r);
+        return Map.of("gronn", g, "gul", u, "rod", r, "totalt", g + u + r);
     }
 
     /**
      * @param token
      * @return
-     * @throws RuntimeException
      */
     public String hashToken(String token) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] bytes = digest.digest(token.getBytes(StandardCharsets.UTF_8));
-            StringBuilder sb = new StringBuilder();
-            for (byte b : bytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("SHA-256 ikkje tilgjengeleg", e);
-        }
+        return String.valueOf(token.hashCode());
     }
 }
