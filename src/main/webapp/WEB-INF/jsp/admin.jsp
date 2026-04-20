@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <body>
-    <h1>Alle forelesningar</h1>
+    <h1>Administrer forelesningar</h1>
 
     <c:if test="${not empty melding}">
         <p style="color:green">${melding}</p>
@@ -28,10 +28,28 @@
                             <a href="${pageContext.request.contextPath}/forelesninger/vis?id=${f.id}">Vis detaljar</a>
                             |
                             <a href="${pageContext.request.contextPath}/tilbakemelding/skjema?forelesningId=${f.id}">Gi tilbakemelding</a>
+                            |
+                            <form method="post" action="${pageContext.request.contextPath}/forelesninger/slett" style="display:inline">
+                                <input type="hidden" name="id" value="${f.id}"/>
+                                <input type="submit" value="Slett" onclick="return confirm('Er du sikker på at du vil slette denne forelesningen?')"/>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
         </c:otherwise>
     </c:choose>
+
+    <h2>Opprett ny forelesning</h2>
+    <form method="post" action="${pageContext.request.contextPath}/forelesninger/opprett">
+        <p>Namn:<br>
+            <input type="text" name="namn" required></p>
+        <p>Tidspunkt:<br>
+            <input type="datetime-local" name="tidspunkt" required></p>
+        <p>Stad:<br>
+            <input type="text" name="sted" required></p>
+        <p><input type="submit" value="Opprett"></p>
+    </form>
+
+    <p><a href="${pageContext.request.contextPath}/forelesninger">Tilbake til oversikt</a></p>
 </body>

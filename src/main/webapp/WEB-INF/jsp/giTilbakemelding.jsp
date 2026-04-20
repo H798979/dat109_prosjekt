@@ -3,7 +3,7 @@
 
 <body>
     <h1>Gi tilbakemelding</h1>
-    <p><b>${forelesning.namn}</b> – ${forelesning.sted}</p>
+    <p><b>${forelesning.navn}</b> – ${forelesning.sted}</p>
 
     <c:if test="${not empty feil}">
         <p style="color:red">${feil}</p>
@@ -17,13 +17,13 @@
                 <option value="">-- Vel vurdering --</option>
                 <c:forEach var="v" items="${vurderinger}">
                     <c:choose>
-                        <c:when test="${v == 'gronn'}">
+                        <c:when test="${v == 'GRONN'}">
                             <option value="${v}">Grøn (bra)</option>
                         </c:when>
                         <c:when test="${v == 'GUL'}">
                             <option value="${v}">Gul (middels)</option>
                         </c:when>
-                        <c:when test="${v == 'rod'}">
+                        <c:when test="${v == 'ROD'}">
                             <option value="${v}">Raud (dårleg)</option>
                         </c:when>
                         <c:otherwise>

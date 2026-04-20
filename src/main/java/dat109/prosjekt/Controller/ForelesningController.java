@@ -33,6 +33,13 @@ public class ForelesningController {
         return "forelesninger";
     }
 
+    @GetMapping("/admin")
+    public String admin(Model model) {
+        List<Forelesning> forelesninger = forelesningRepo.findAll();
+        model.addAttribute("forelesninger", forelesninger);
+        return "admin";
+    }
+
     /**
      * @param id
      * @param model
@@ -71,6 +78,23 @@ public class ForelesningController {
         Forelesning f = new Forelesning(namn, dt, sted);
         forelesningRepo.save(f);
         ra.addFlashAttribute("melding", "Forelesning oppretta!");
-        return "redirect:/forelesninger";
+        return "redirect:/admin";
+    }
+
+    /**
+     * @param id
+     * @param ra
+     * @return
+     */
+
+    @PostMapping("/forelesninger/slett")
+    public String slett(@RequestParam Long id, RedirectAttributes ra) {
+        if (forelesningRepo.existsById(Objects.requireNonNull(id))) {
+            forelesningRepo.deleteById(id);
+            ra.addFlashAttribute("melding", "Forelesning sletta!");
+        } else {
+            ra.addFlashAttribute("feil", "Forelesning ikkje funnen.");
+        }
+        return "redirect:/admin";
     }
 }
