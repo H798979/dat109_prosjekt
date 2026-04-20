@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface TilbakemeldingRepo extends JpaRepository<Tilbakemelding, Long> {
 
+   
+   
     /**
      * @param forelesningId
      * @param studentTokenHash
@@ -18,14 +20,17 @@ public interface TilbakemeldingRepo extends JpaRepository<Tilbakemelding, Long> 
      */
     boolean existsByForelesningIdAndStudentTokenHash(Long forelesningId, String studentTokenHash);
 
+   
+   
     /**
      * @param forelesningId
      * @return
      */
     List<Tilbakemelding> findByForelesningId(Long forelesningId);
 
+   
+   
     /**
-    
      * @param forelesningId 
      * @param vurdering     
      * @return 

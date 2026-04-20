@@ -20,6 +20,8 @@ public class Forelesning {
 
     public Forelesning() {}
 
+
+
     /**
      * @param navn
      * @param tidspunkt
@@ -31,51 +33,61 @@ public class Forelesning {
         this.sted = sted;
     }
 
+
     /** @return */
     public Long getId() {
         return id;
         }
+
 
     /** @param id */
     public void setId(Long id) {
         this.id = id;
         }
 
+
     /** @return */
     public String getNavn() {
         return navn;
         }
+
 
     /** @param navn */
     public void setNavn(String navn) {
         this.navn = navn;
         }
 
+
     /** @return */
     public LocalDateTime getTidspunkt() {
         return tidspunkt;
         }
+
 
     /** @param tidspunkt */
     public void setTidspunkt(LocalDateTime tidspunkt) {
         this.tidspunkt = tidspunkt;
         }
 
+
     /** @return */
     public String getSted() {
         return sted;
         }
+
 
     /** @param sted */
     public void setSted(String sted) {
         this.sted = sted;
         }
 
+
     /** @return */
     public List<Tilbakemelding> getTilbakemeldinger() {
         return tilbakemeldinger;
         }
 
+        
     /** @param t */
     public void setTilbakemeldinger(List<Tilbakemelding> t) {
         this.tilbakemeldinger = t;

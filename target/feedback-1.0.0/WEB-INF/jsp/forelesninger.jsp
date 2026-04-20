@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <body>
+    <div style="text-align:right">
+        <a href="${pageContext.request.contextPath}/login">Admin</a>
+    </div>
+
     <h1>Alle forelesningar</h1>
 
     <c:if test="${not empty melding}">
@@ -12,7 +16,7 @@
     </c:if>
 
     <c:choose>
-        <c:when test="${empty forelesningar}">
+        <c:when test="${empty forelesninger}">
             <p>Ingen forelesningar registrerte.</p>
         </c:when>
         <c:otherwise>
@@ -34,15 +38,4 @@
             </table>
         </c:otherwise>
     </c:choose>
-
-    <h2>Opprett ny forelesning</h2>
-    <form method="post" action="${pageContext.request.contextPath}/forelesninger/opprett">
-        <p>navn:<br>
-            <input type="text" name="navn" required></p>
-        <p>Tidspunkt:<br>
-            <input type="datetime-local" name="tidspunkt" required></p>
-        <p>Stad:<br>
-            <input type="text" name="sted" required></p>
-        <p><input type="submit" value="Opprett"></p>
-    </form>
 </body>
