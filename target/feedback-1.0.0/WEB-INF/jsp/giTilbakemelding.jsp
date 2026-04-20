@@ -3,7 +3,7 @@
 
 <body>
     <h1>Gi tilbakemelding</h1>
-    <p><b>${forelesning.namn}</b> – ${forelesning.sted}</p>
+    <p><b>${forelesning.navn}</b> – ${forelesning.sted}</p>
 
     <c:if test="${not empty feil}">
         <p style="color:red">${feil}</p>

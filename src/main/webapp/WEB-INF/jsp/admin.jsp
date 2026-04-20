@@ -17,7 +17,7 @@
         </c:when>
         <c:otherwise>
             <table>
-                <tr><th>ID</th><th>Namn</th><th>Tidspunkt</th><th>Stad</th><th>Handlingar</th></tr>
+                <tr><th>ID</th><th>Navn</th><th>Tidspunkt</th><th>Stad</th><th>Handlingar</th></tr>
                 <c:forEach var="f" items="${forelesninger}">
                     <tr>
                         <td>${f.id}</td>
@@ -42,8 +42,8 @@
 
     <h2>Opprett ny forelesning</h2>
     <form method="post" action="${pageContext.request.contextPath}/forelesninger/opprett">
-        <p>Namn:<br>
-            <input type="text" name="namn" required></p>
+        <p>navn:<br>
+            <input type="text" name="navn" required></p>
         <p>Tidspunkt:<br>
             <input type="datetime-local" name="tidspunkt" required></p>
         <p>Stad:<br>

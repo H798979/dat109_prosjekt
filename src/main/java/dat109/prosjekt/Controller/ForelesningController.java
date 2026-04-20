@@ -51,7 +51,7 @@ public class ForelesningController {
     }
 
     /**
-     * @param brukarnamn
+     * @param brukarnavn
      * @param passord
      * @param session
      * @param ra
@@ -59,15 +59,15 @@ public class ForelesningController {
      */
 
     @PostMapping("/login")
-    public String login(@RequestParam String brukarnamn,
+    public String login(@RequestParam String brukarnavn,
                         @RequestParam String passord,
                         HttpSession session,
                         RedirectAttributes ra) {
-        if ("admin".equals(brukarnamn) && "admin123".equals(passord)) {
+        if ("admin".equals(brukarnavn) && "admin123".equals(passord)) {
             session.setAttribute("admin", true);
             return "redirect:/admin";
         }
-        ra.addFlashAttribute("feil", "Feil brukarnamn eller passord.");
+        ra.addFlashAttribute("feil", "Feil brukarnavn eller passord.");
         return "redirect:/login";
     }
 
@@ -98,7 +98,7 @@ public class ForelesningController {
     }
 
     /**
-     * @param namn
+     * @param navn
      * @param tidspunkt
      * @param sted
      * @param ra
@@ -107,7 +107,7 @@ public class ForelesningController {
     
 
     @PostMapping("/forelesninger/opprett")
-    public String opprett(@RequestParam String namn,
+    public String opprett(@RequestParam String navn,
                           @RequestParam String tidspunkt,
                           @RequestParam String sted,
                           HttpSession session,
@@ -116,7 +116,7 @@ public class ForelesningController {
             return "redirect:/login";
         }
         LocalDateTime dt = LocalDateTime.parse(tidspunkt);
-        Forelesning f = new Forelesning(namn, dt, sted);
+        Forelesning f = new Forelesning(navn, dt, sted);
         forelesningRepo.save(f);
         ra.addFlashAttribute("melding", "Forelesning oppretta!");
         return "redirect:/admin";

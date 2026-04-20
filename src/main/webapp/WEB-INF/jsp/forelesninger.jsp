@@ -21,7 +21,7 @@
         </c:when>
         <c:otherwise>
             <table>
-                <tr><th>ID</th><th>Namn</th><th>Tidspunkt</th><th>Stad</th><th>Handlingar</th></tr>
+                <tr><th>ID</th><th>navn</th><th>Tidspunkt</th><th>Stad</th><th>Handlingar</th></tr>
                 <c:forEach var="f" items="${forelesninger}">
                     <tr>
                         <td>${f.id}</td>

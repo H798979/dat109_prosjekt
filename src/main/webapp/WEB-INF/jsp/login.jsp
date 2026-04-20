@@ -9,8 +9,8 @@
     </c:if>
 
     <form method="post" action="${pageContext.request.contextPath}/login">
-        <p>Brukarnamn:<br>
-            <input type="text" name="brukarnamn" required></p>
+        <p>Brukarnavn:<br>
+            <input type="text" name="brukarnavn" required></p>
         <p>Passord:<br>
             <input type="password" name="passord" required></p>
         <p><input type="submit" value="Logg inn"></p>
