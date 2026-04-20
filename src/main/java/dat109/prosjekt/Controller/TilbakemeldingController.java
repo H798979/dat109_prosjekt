@@ -11,6 +11,7 @@ import dat109.prosjekt.Service.TilbakemeldingService;
 import dat109.prosjekt.entity.Forelesning;
 import dat109.prosjekt.entity.TilbakemeldingVerdi;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -28,7 +29,7 @@ public class TilbakemeldingController {
      */
     @GetMapping("/skjema")
     public String visSkjema(@RequestParam Long forelesningId, Model model, RedirectAttributes ra) {
-        Optional<Forelesning> opt = forelesningRepo.findById(forelesningId);
+        Optional<Forelesning> opt = forelesningRepo.findById(Objects.requireNonNull(forelesningId));
         if (opt.isEmpty()) {
             ra.addFlashAttribute("feil", "Forelesning ikkje funnen.");
             return "redirect:/forelesninger";
@@ -50,7 +51,7 @@ public class TilbakemeldingController {
                                    @RequestParam String vurdering,
                                    @RequestParam String studentToken,
                                    RedirectAttributes ra) {
-        Optional<Forelesning> opt = forelesningRepo.findById(forelesningId);
+        Optional<Forelesning> opt = forelesningRepo.findById(Objects.requireNonNull(forelesningId));
         if (opt.isEmpty()) {
             ra.addFlashAttribute("feil", "Forelesning ikkje funnen.");
             return "redirect:/forelesninger";

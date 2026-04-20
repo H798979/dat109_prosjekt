@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <body>
-    <h1>${forelesning.namn}</h1>
+    <h1>${forelesning.navn}</h1>
 
     <c:if test="${not empty melding}">
         <p style="color:green">${melding}</p>

@@ -12,6 +12,7 @@ import dat109.prosjekt.entity.Forelesning;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -42,7 +43,7 @@ public class ForelesningController {
 
     @GetMapping("/forelesninger/vis")
     public String hentMedId(@RequestParam Long id, Model model, RedirectAttributes ra) {
-        Optional<Forelesning> opt = forelesningRepo.findById(id);
+        Optional<Forelesning> opt = forelesningRepo.findById(Objects.requireNonNull(id));
         if (opt.isEmpty()) {
             ra.addFlashAttribute("feil", "Forelesning ikkje funnen.");
             return "redirect:/forelesninger";
