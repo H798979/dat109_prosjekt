@@ -12,7 +12,7 @@
     </c:if>
 
     <c:choose>
-        <c:when test="${empty forelesningar}">
+        <c:when test="${empty forelesninger}">
             <p>Ingen forelesningar registrerte.</p>
         </c:when>
         <c:otherwise>
