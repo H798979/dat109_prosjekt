@@ -1,9 +1,9 @@
 D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\Applikasjon.java
+D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\Controller\ForelesningController.java
+D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\Controller\TilbakemeldingController.java
+D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\entity\Forelesning.java
+D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\entity\Tilbakemelding.java
 D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\entity\TilbakemeldingVerdi.java
 D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\Repo\ForelesningRepo.java
 D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\Repo\TilbakemeldingRepo.java
-D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\Controller\TilbakemeldingController.java
-D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\entity\Tilbakemelding.java
-D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\entity\Forelesning.java
 D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\Service\TilbakemeldingService.java
-D:\Skoli\Github desktop kóðar\dat109_prosjekt\src\main\java\dat109\prosjekt\Controller\ForelesningController.java
