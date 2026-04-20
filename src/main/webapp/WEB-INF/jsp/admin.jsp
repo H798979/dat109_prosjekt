@@ -51,5 +51,9 @@
         <p><input type="submit" value="Opprett"></p>
     </form>
 
-    <p><a href="${pageContext.request.contextPath}/forelesninger">Tilbake til oversikt</a></p>
+    <p>
+        <a href="${pageContext.request.contextPath}/forelesninger">Tilbake til oversikt</a>
+        |
+        <a href="${pageContext.request.contextPath}/loggut">Logg ut</a>
+    </p>
 </body>

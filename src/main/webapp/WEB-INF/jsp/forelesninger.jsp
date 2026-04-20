@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <body>
+    <div style="text-align:right">
+        <a href="${pageContext.request.contextPath}/login">Admin</a>
+    </div>
+
     <h1>Alle forelesningar</h1>
 
     <c:if test="${not empty melding}">

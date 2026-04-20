@@ -10,6 +10,7 @@ import dat109.prosjekt.Repo.ForelesningRepo;
 import dat109.prosjekt.Service.TilbakemeldingService;
 import dat109.prosjekt.entity.Forelesning;
 
+import jakarta.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -34,10 +35,46 @@ public class ForelesningController {
     }
 
     @GetMapping("/admin")
-    public String admin(Model model) {
+    public String admin(Model model, HttpSession session, RedirectAttributes ra) {
+        if (session.getAttribute("admin") == null) {
+            ra.addFlashAttribute("feil", "Du må logge inn først.");
+            return "redirect:/login";
+        }
         List<Forelesning> forelesninger = forelesningRepo.findAll();
         model.addAttribute("forelesninger", forelesninger);
         return "admin";
+    }
+
+    @GetMapping("/login")
+    public String visLogin() {
+        return "login";
+    }
+
+    /**
+     * @param brukarnamn
+     * @param passord
+     * @param session
+     * @param ra
+     * @return
+     */
+
+    @PostMapping("/login")
+    public String login(@RequestParam String brukarnamn,
+                        @RequestParam String passord,
+                        HttpSession session,
+                        RedirectAttributes ra) {
+        if ("admin".equals(brukarnamn) && "admin123".equals(passord)) {
+            session.setAttribute("admin", true);
+            return "redirect:/admin";
+        }
+        ra.addFlashAttribute("feil", "Feil brukarnamn eller passord.");
+        return "redirect:/login";
+    }
+
+    @GetMapping("/loggut")
+    public String loggUt(HttpSession session) {
+        session.invalidate();
+        return "redirect:/forelesninger";
     }
 
     /**
@@ -73,7 +110,11 @@ public class ForelesningController {
     public String opprett(@RequestParam String namn,
                           @RequestParam String tidspunkt,
                           @RequestParam String sted,
+                          HttpSession session,
                           RedirectAttributes ra) {
+        if (session.getAttribute("admin") == null) {
+            return "redirect:/login";
+        }
         LocalDateTime dt = LocalDateTime.parse(tidspunkt);
         Forelesning f = new Forelesning(namn, dt, sted);
         forelesningRepo.save(f);
@@ -88,7 +129,10 @@ public class ForelesningController {
      */
 
     @PostMapping("/forelesninger/slett")
-    public String slett(@RequestParam Long id, RedirectAttributes ra) {
+    public String slett(@RequestParam Long id, HttpSession session, RedirectAttributes ra) {
+        if (session.getAttribute("admin") == null) {
+            return "redirect:/login";
+        }
         if (forelesningRepo.existsById(Objects.requireNonNull(id))) {
             forelesningRepo.deleteById(id);
             ra.addFlashAttribute("melding", "Forelesning sletta!");
