@@ -47,25 +47,24 @@ public class TilbakemeldingController {
      * @return
      */
     @PostMapping("/send")
-    public String giTilbakemelding(@RequestParam Long forelesningId,
-                                   @RequestParam String vurdering,
-                                   @RequestParam String studentToken,
-                                   RedirectAttributes ra) {
+    public String giTilbakemelding(@RequestParam Long forelesningId, @RequestParam String vurdering, @RequestParam String studentToken, RedirectAttributes ra) {
         Optional<Forelesning> opt = forelesningRepo.findById(Objects.requireNonNull(forelesningId));
-        if (opt.isEmpty()) {
-            ra.addFlashAttribute("feil", "Forelesning ikkje funnen.");
-            return "redirect:/forelesninger";
+            if (opt.isEmpty()) {
+               ra.addFlashAttribute("feil", "Forelesning ikkje funnen.");
+                return "redirect:/forelesninger";
         }
 
-        try {
-            TilbakemeldingVerdi verdi = TilbakemeldingVerdi.valueOf(vurdering);
-            tilbakemeldingService.registrer(opt.get(), verdi, studentToken);
-            ra.addFlashAttribute("melding", "Tilbakemelding registrert!");
-        } catch (IllegalArgumentException e) {
-            ra.addFlashAttribute("feil", "Ugyldig vurdering.");
-        } catch (IllegalStateException e) {
-            ra.addFlashAttribute("feil", e.getMessage());
-        }
+            try {
+                TilbakemeldingVerdi verdi = TilbakemeldingVerdi.valueOf(vurdering);
+                    tilbakemeldingService.registrer(opt.get(), verdi, studentToken);
+                    ra.addFlashAttribute("melding", "Tilbakemelding registrert!");
+
+             } catch (IllegalArgumentException e) {
+                 ra.addFlashAttribute("feil", "Ugyldig vurdering.");
+             } catch (IllegalStateException e) {
+                ra.addFlashAttribute("feil", e.getMessage());
+            }
+            
         return "redirect:/forelesninger/vis?id=" + forelesningId;
     }
 }

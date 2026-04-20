@@ -27,12 +27,14 @@ public class ForelesningController {
         return "redirect:/forelesninger";
     }
 
+
     @GetMapping("/forelesninger")
     public String hentAlle(Model model) {
         List<Forelesning> forelesninger = forelesningRepo.findAll();
         model.addAttribute("forelesninger", forelesninger);
         return "forelesninger";
     }
+
 
     @GetMapping("/admin")
     public String admin(Model model, HttpSession session, RedirectAttributes ra) {
@@ -45,11 +47,15 @@ public class ForelesningController {
         return "admin";
     }
 
+
     @GetMapping("/login")
     public String visLogin() {
         return "login";
     }
 
+
+
+    
     /**
      * @param brukarnavn
      * @param passord
@@ -57,12 +63,9 @@ public class ForelesningController {
      * @param ra
      * @return
      */
-
+ 
     @PostMapping("/login")
-    public String login(@RequestParam String brukarnavn,
-                        @RequestParam String passord,
-                        HttpSession session,
-                        RedirectAttributes ra) {
+    public String login(@RequestParam String brukarnavn, @RequestParam String passord, HttpSession session, RedirectAttributes ra) {
         if ("admin".equals(brukarnavn) && "12345".equals(passord)) {
             session.setAttribute("admin", true);
             return "redirect:/admin";
@@ -77,13 +80,15 @@ public class ForelesningController {
         return "redirect:/forelesninger";
     }
 
+
+
+
     /**
      * @param id
      * @param model
      * @param ra
      * @return
      */
-
 
     @GetMapping("/forelesninger/vis")
     public String hentMedId(@RequestParam Long id, Model model, RedirectAttributes ra) {
@@ -97,6 +102,9 @@ public class ForelesningController {
         return "forelesning";
     }
 
+
+
+
     /**
      * @param navn
      * @param tidspunkt
@@ -105,13 +113,8 @@ public class ForelesningController {
      * @return
      */
     
-
     @PostMapping("/forelesninger/opprett")
-    public String opprett(@RequestParam String navn,
-                          @RequestParam String tidspunkt,
-                          @RequestParam String sted,
-                          HttpSession session,
-                          RedirectAttributes ra) {
+    public String opprett(@RequestParam String navn, @RequestParam String tidspunkt, @RequestParam String sted, HttpSession session, RedirectAttributes ra) {
         if (session.getAttribute("admin") == null) {
             return "redirect:/login";
         }
@@ -121,6 +124,9 @@ public class ForelesningController {
         ra.addFlashAttribute("melding", "Forelesning oppretta!");
         return "redirect:/admin";
     }
+
+
+    
 
     /**
      * @param id
