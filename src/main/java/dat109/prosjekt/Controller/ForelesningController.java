@@ -63,7 +63,7 @@ public class ForelesningController {
                         @RequestParam String passord,
                         HttpSession session,
                         RedirectAttributes ra) {
-        if ("admin".equals(brukarnavn) && "admin123".equals(passord)) {
+        if ("admin".equals(brukarnavn) && "12345".equals(passord)) {
             session.setAttribute("admin", true);
             return "redirect:/admin";
         }
