@@ -56,10 +56,11 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- JSP-støtte -->
+        <!-- JSP-støtte – provided sidan ekstern Tomcat har eigen Jasper -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- JSTL -->
